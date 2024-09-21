@@ -1,0 +1,8 @@
+{
+  "name": "Wingbuds",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular",
+  "id": "5cd78507"
+}
