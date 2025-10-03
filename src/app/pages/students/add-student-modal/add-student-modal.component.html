@@ -1,0 +1,78 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Add Student</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="dismiss()">Close</ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <form (ngSubmit)="saveStudent()" #studentForm="ngForm" class="ion-padding">
+
+    <ion-item>
+      <ion-label position="floating">First Name</ion-label>
+      <ion-input [(ngModel)]="student.first_name" name="first_name" required></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="floating">Last Name</ion-label>
+      <ion-input [(ngModel)]="student.last_name" name="last_name" required></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="floating">Email</ion-label>
+      <ion-input type="email" [(ngModel)]="student.email" name="email"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="floating">Phone</ion-label>
+      <ion-input type="tel" [(ngModel)]="student.phone" name="phone"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="floating">Alt Phone</ion-label>
+      <ion-input type="tel" [(ngModel)]="student.alt_phone" name="alt_phone"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="floating">Parent</ion-label>
+      <ion-input [(ngModel)]="student.parent" name="parent"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="floating">Username</ion-label>
+      <ion-input [(ngModel)]="student.username" name="username"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="floating">Password</ion-label>
+      <ion-input type="password" [(ngModel)]="student.password" name="password"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label>Status</ion-label>
+      <ion-select [(ngModel)]="student.status" name="status">
+        <ion-select-option value="active">Active</ion-select-option>
+        <ion-select-option value="inactive">Inactive</ion-select-option>
+      </ion-select>
+    </ion-item>
+
+    <!-- ✅ Image Upload -->
+    <ion-item>
+      <ion-label>Profile Image</ion-label>
+      <input type="file" accept="image/*" (change)="onFileSelected($event)" />
+    </ion-item>
+
+    <!-- ✅ Preview -->
+    <div *ngIf="previewImage" class="ion-text-center ion-padding">
+      <ion-avatar>
+        <img [src]="previewImage" />
+      </ion-avatar>
+    </div>
+
+    <ion-button expand="block" type="submit" [disabled]="!studentForm.form.valid">
+      Save Student
+    </ion-button>
+  </form>
+</ion-content>

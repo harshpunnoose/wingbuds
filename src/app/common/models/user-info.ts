@@ -2,6 +2,7 @@ export interface UserInfo {
   alt_phone: string;
   created_time: number;
   email: string;
+  fees: number;
   first_name: string;
   id: number;
   last_login_time: number;
@@ -18,8 +19,8 @@ export interface UserInfo {
 }
 
 export interface UserInfoPagination {
-  userInfo: Array<UserInfo>;
   totalRecord: number;
+  userInfo: Array<UserInfo>;
 }
 
 export enum UserType {

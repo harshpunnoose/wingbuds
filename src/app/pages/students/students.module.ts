@@ -4,6 +4,8 @@ import { IonicModule } from '@ionic/angular';
 import { NgModule } from '@angular/core';
 import { StudentsPage } from './students.page';
 import { StudentsPageRoutingModule } from './students-routing.module';
+import { AddStudentModalComponent } from './add-student-modal/add-student-modal.component';
+import { AssignSubjectModalComponent } from './assign-subject-modal/assign-subject-modal.component';
 
 @NgModule({
   imports: [
@@ -12,6 +14,10 @@ import { StudentsPageRoutingModule } from './students-routing.module';
     IonicModule,
     StudentsPageRoutingModule,
   ],
-  declarations: [StudentsPage],
+  declarations: [
+    StudentsPage,
+    AddStudentModalComponent,
+    AssignSubjectModalComponent,
+  ],
 })
 export class StudentsPageModule { }

@@ -1,0 +1,29 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Assign Subject</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="dismiss()">Close</ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <ion-list>
+    <ion-item>
+      <ion-label position="floating">Subject</ion-label>
+      <ion-input [(ngModel)]="subject.subject" name="subject"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="floating">Teacher</ion-label>
+      <ion-input [(ngModel)]="subject.teacher" name="teacher"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="floating">Fees</ion-label>
+      <ion-input type="number" [(ngModel)]="subject.fees" name="fees"></ion-input>
+    </ion-item>
+  </ion-list>
+
+  <ion-button expand="block" (click)="saveSubject()">Save</ion-button>
+</ion-content>

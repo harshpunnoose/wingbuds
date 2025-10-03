@@ -38,6 +38,10 @@ const routes: Routes = [
   {
     path: 'dashboard',
     loadChildren: () => import('./pages/dashboard/dashboard.module').then(m => m.DashboardPageModule)
+  },
+  {
+    path: 'student/:id',
+    loadChildren: () => import('./pages/student-detail/student-detail.module').then(m => m.StudentDetailPageModule)
   }
 
 ];
