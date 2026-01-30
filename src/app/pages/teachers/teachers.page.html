@@ -4,6 +4,11 @@
       <ion-menu-button></ion-menu-button>
     </ion-buttons>
     <ion-title>Teachers</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="openAddTeacherModal()">
+        <ion-icon name="add-circle-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
@@ -13,22 +18,34 @@
       <ion-title size="large">Teachers</ion-title>
     </ion-toolbar>
   </ion-header>
-  <ion-searchbar [(ngModel)]="searchText" (ionInput)="filterTeachers()" placeholder="Search students">
-  </ion-searchbar>
 
+  <!-- 🔍 Search + Sort Row -->
+  <ion-item>
+    <ion-searchbar [(ngModel)]="searchText" (ionInput)="filterTeachers()" placeholder="Search Teachers"
+      class="flex-grow">
+    </ion-searchbar>
+
+    <ion-button fill="clear" (click)="openSortOptions()">
+      <ion-icon slot="icon-only" name="swap-vertical-outline"></ion-icon>
+    </ion-button>
+  </ion-item>
   <ion-grid>
     <ion-row>
-      <ion-col size="12" size-md="6" size-lg="4" *ngFor="let teacher of filteredUsers">
-        <ion-card>
+      <ion-col size="12" size-md="6" size-lg="6" *ngFor="let user of filteredUsers">
+        <ion-card (click)="openTeacherDetail(user)">
           <ion-card-header>
             <ion-item lines="none">
               <ion-avatar slot="start">
-                <img [alt]="teacher?.first_name + ' ' + teacher?.last_name"
-                  src="https://ionicframework.com/docs/img/demos/avatar.svg" />
+                <img [alt]="user?.first_name + ' ' + user?.last_name"
+                  [src]="user?.user_img_url || 'assets/icons/human-icon.png'" />
               </ion-avatar>
               <ion-label>
-                <ion-card-title>{{teacher?.first_name}} {{teacher?.last_name}}</ion-card-title>
-                <ion-card-subtitle>Card Subtitle</ion-card-subtitle>
+                <ion-card-title>{{ user?.first_name }} {{ user?.last_name }}</ion-card-title>
+                <ion-card-subtitle>
+                  Parent : {{ user?.parent }}<br>
+                  Mobile: {{ user?.phone }} <br>
+                  Email: {{ user?.email }}
+                </ion-card-subtitle>
               </ion-label>
             </ion-item>
           </ion-card-header>
@@ -36,4 +53,5 @@
       </ion-col>
     </ion-row>
   </ion-grid>
+
 </ion-content>

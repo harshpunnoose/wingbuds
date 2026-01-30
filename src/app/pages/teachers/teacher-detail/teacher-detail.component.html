@@ -1,0 +1,96 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/teachers"></ion-back-button>
+    </ion-buttons>
+    <ion-title>{{ teacher?.first_name }} {{ teacher?.last_name }}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <!-- Tabs -->
+  <ion-segment [(ngModel)]="selectedTab">
+    <ion-segment-button value="profile">Profile</ion-segment-button>
+    <ion-segment-button value="subjects">Subjects</ion-segment-button>
+    <ion-segment-button value="attendance">Attendance</ion-segment-button>
+    <ion-segment-button value="billing">Billing</ion-segment-button>
+  </ion-segment>
+
+  <!-- Tab Contents -->
+  <div [ngSwitch]="selectedTab">
+    <!-- Profile -->
+    <div *ngSwitchCase="'profile'" class="ion-padding">
+      <ion-card>
+        <ion-card-header>
+          <ion-avatar>
+            <img [src]="teacher?.user_img_url || 'assets/icons/human-icon.png'" />
+          </ion-avatar>
+          <ion-card-title>{{ teacher?.first_name }} {{ teacher?.last_name }}</ion-card-title>
+          <!-- <ion-card-subtitle>Status: {{ teacher?.status }}</ion-card-subtitle> -->
+        </ion-card-header>
+        <ion-card-content>
+          <p><strong>Status:</strong> {{ teacher?.status }}</p>
+          <p><strong>Email:</strong> {{ teacher?.email }}</p>
+          <p><strong>Phone:</strong> {{ teacher?.phone }}</p>
+          <p><strong>Parent:</strong> {{ teacher?.parent }}</p>
+        </ion-card-content>
+      </ion-card>
+      <ion-button expand="block" (click)="editteacher()">
+        <ion-icon name="create-outline" slot="start"></ion-icon>
+        Edit teacher
+      </ion-button>
+      <ion-button expand="block" (click)="confirmDeleteteacher()" color="danger">
+        <ion-icon name="trash-outline" slot="start"></ion-icon>Delete
+      </ion-button>
+    </div>
+
+    <!-- Attendance -->
+    <div *ngSwitchCase="'attendance'" class="ion-padding">
+      <ion-list>
+        <ion-item *ngFor="let sub of teacher?.subjects">
+          <ion-label>
+            <h2>{{ sub.subject }}</h2>
+            <p>Teacher: {{ sub.teacher }} | Fees: {{ sub.fees }}</p>
+          </ion-label>
+          <ion-button fill="clear" (click)="removeSubject(sub)" color="danger">
+            <ion-icon name="trash-outline"></ion-icon>
+          </ion-button>
+        </ion-item>
+      </ion-list>
+      <ion-button expand="block" (click)="openAssignSubject()">+ Add Subject</ion-button>
+    </div>
+
+    <!-- Subjects -->
+    <div *ngSwitchCase="'subjects'" class="ion-padding">
+      <ion-list>
+        <ion-item *ngFor="let sub of teacher?.subjects">
+          <ion-label>
+            <h2>{{ sub.subject }}</h2>
+            <p>Teacher: {{ sub.teacher }} | Fees: {{ sub.fees }}</p>
+          </ion-label>
+          <ion-button fill="clear" (click)="removeSubject(sub)" color="danger">
+            <ion-icon name="trash-outline"></ion-icon>
+          </ion-button>
+        </ion-item>
+      </ion-list>
+      <ion-button expand="block" (click)="openAssignSubject()">+ Add Subject</ion-button>
+    </div>
+
+    <!-- Billing -->
+    <div *ngSwitchCase="'billing'" class="ion-padding">
+      <ion-list>
+        <ion-item *ngFor="let bill of teacher?.billingHistory">
+          <ion-label>
+            <h2>Invoice #{{ bill.invoiceNo }}</h2>
+            <p>{{ bill.date }} • Amount: {{ bill.amount }}</p>
+          </ion-label>
+          <ion-button fill="clear" (click)="viewInvoice(bill)">
+            <ion-icon name="document-text-outline"></ion-icon>
+          </ion-button>
+        </ion-item>
+      </ion-list>
+      <ion-button expand="block" (click)="generateBill()">Generate Bill</ion-button>
+      <ion-button expand="block" color="secondary" (click)="generateInvoice()">Generate Invoice</ion-button>
+    </div>
+  </div>
+</ion-content>

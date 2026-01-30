@@ -12,8 +12,16 @@ const routes: Routes = [
     loadChildren: () => import('./pages/teachers/teachers.module').then(m => m.TeachersPageModule)
   },
   {
+    path: 'teacher/:id',
+    loadChildren: () => import('./pages/teachers/teacher-detail/teacher-detail.module').then(m => m.TeacherDetailModule)
+  },
+  {
     path: 'students',
     loadChildren: () => import('./pages/students/students.module').then(m => m.StudentsPageModule)
+  },
+  {
+    path: 'student/:id',
+    loadChildren: () => import('./pages/students/student-detail/student-detail.module').then(m => m.StudentDetailPageModule)
   },
   {
     path: 'subjects',
@@ -39,11 +47,6 @@ const routes: Routes = [
     path: 'dashboard',
     loadChildren: () => import('./pages/dashboard/dashboard.module').then(m => m.DashboardPageModule)
   },
-  {
-    path: 'student/:id',
-    loadChildren: () => import('./pages/student-detail/student-detail.module').then(m => m.StudentDetailPageModule)
-  }
-
 ];
 
 @NgModule({

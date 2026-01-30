@@ -1,7 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { map, Observable } from 'rxjs';
-import { UserInfoPagination, UserType } from '../models/user-info';
+import { UserInfo, UserInfoPagination, UserType } from '../models/user-info';
+import { BASE_URL } from '../common.config';
 
 @Injectable({
   providedIn: 'root'
@@ -9,6 +10,7 @@ import { UserInfoPagination, UserType } from '../models/user-info';
 export class UserService {
 
   readonly API_USER_LIST = 'assets/mock/user-info.json';
+  readonly API_MANAGE_STUDENT = '/api/students';
 
   constructor(private http: HttpClient) { }
 
@@ -17,18 +19,24 @@ export class UserService {
       responseType: 'json',
     }).pipe(map((data: UserInfoPagination) => {
       // Filter the user info based on userType
-      const filteredUserInfo = data.userInfo?.filter(info => info.user_type === userType) ?? [];
-      return {
-        userInfo: filteredUserInfo,
-        totalRecord: data?.totalRecord ? data?.totalRecord : 0
-      };
+      // const filteredUserInfo = data.userInfo?.filter(info => info?.user_type === userType) ?? [];
+      // const filteredUserInfo = data.userInfo ?? [];
+      // return {
+      //   userInfo: filteredUserInfo,
+      //   totalRecord: data?.totalRecord ? data?.totalRecord : 0
+      // };
+      return data;
     })
     );
   }
 
-  addUser(user: any) {
-    return this.http.post('/api/users', user);
-  }
+
+
+  // addUser(user: any) {
+  //   console.log('harsh user = ', user);
+  //   const apiUrl = `${BASE_URL}${this.API_MANAGE_STUDENT}`;
+  //   return this.http.post(apiUrl, user);
+  // }
 
 
 }

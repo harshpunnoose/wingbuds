@@ -8,51 +8,51 @@
 </ion-header>
 
 <ion-content>
-  <form (ngSubmit)="saveStudent()" #studentForm="ngForm" class="ion-padding">
+  <form (ngSubmit)="saveTeacher()" #teacherForm="ngForm" class="ion-padding">
 
     <ion-item>
       <ion-label position="floating">First Name</ion-label>
-      <ion-input [(ngModel)]="student.first_name" name="first_name" required></ion-input>
+      <ion-input [(ngModel)]="teacher.first_name" name="first_name" required></ion-input>
     </ion-item>
 
     <ion-item>
       <ion-label position="floating">Last Name</ion-label>
-      <ion-input [(ngModel)]="student.last_name" name="last_name" required></ion-input>
+      <ion-input [(ngModel)]="teacher.last_name" name="last_name" required></ion-input>
     </ion-item>
 
     <ion-item>
       <ion-label position="floating">Email</ion-label>
-      <ion-input type="email" [(ngModel)]="student.email" name="email"></ion-input>
+      <ion-input type="email" [(ngModel)]="teacher.email" name="email"></ion-input>
     </ion-item>
 
     <ion-item>
       <ion-label position="floating">Phone</ion-label>
-      <ion-input type="tel" [(ngModel)]="student.phone" name="phone"></ion-input>
+      <ion-input type="tel" [(ngModel)]="teacher.phone" name="phone"></ion-input>
     </ion-item>
 
     <ion-item>
-      <ion-label position="floating">Alt Phone</ion-label>
-      <ion-input type="tel" [(ngModel)]="student.alt_phone" name="alt_phone"></ion-input>
+      <ion-label position="floating">Skype ID</ion-label>
+      <ion-input type="tel" [(ngModel)]="teacher.skype_id" name="skype_id"></ion-input>
     </ion-item>
 
-    <ion-item>
+    <!-- <ion-item>
       <ion-label position="floating">Parent</ion-label>
-      <ion-input [(ngModel)]="student.parent" name="parent"></ion-input>
-    </ion-item>
+      <ion-input [(ngModel)]="teacher.parent" name="parent"></ion-input>
+    </ion-item> -->
 
     <ion-item>
       <ion-label position="floating">Username</ion-label>
-      <ion-input [(ngModel)]="student.username" name="username"></ion-input>
+      <ion-input [(ngModel)]="teacher.username" name="username"></ion-input>
     </ion-item>
 
     <ion-item>
       <ion-label position="floating">Password</ion-label>
-      <ion-input type="password" [(ngModel)]="student.password" name="password"></ion-input>
+      <ion-input type="password" [(ngModel)]="teacher.password" name="password"></ion-input>
     </ion-item>
 
     <ion-item>
       <ion-label>Status</ion-label>
-      <ion-select [(ngModel)]="student.status" name="status">
+      <ion-select [(ngModel)]="teacher.status" name="status">
         <ion-select-option value="active">Active</ion-select-option>
         <ion-select-option value="inactive">Inactive</ion-select-option>
       </ion-select>
@@ -71,8 +71,8 @@
       </ion-avatar>
     </div>
 
-    <ion-button expand="block" type="submit" [disabled]="!studentForm.form.valid">
-      Save Student
+    <ion-button expand="block" type="submit" [disabled]="!teacherForm.form.valid">
+      Save Teacher
     </ion-button>
   </form>
 </ion-content>

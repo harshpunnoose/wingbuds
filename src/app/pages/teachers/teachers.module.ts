@@ -1,20 +1,21 @@
-import { NgModule } from '@angular/core';
+import { AddTeacherModalComponent } from './add-teacher-modal/add-teacher-modal.component';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-
 import { IonicModule } from '@ionic/angular';
-
-import { TeachersPageRoutingModule } from './teachers-routing.module';
-
+import { NgModule } from '@angular/core';
 import { TeachersPage } from './teachers.page';
+import { TeachersPageRoutingModule } from './teachers-routing.module';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    TeachersPageRoutingModule
+    TeachersPageRoutingModule,
   ],
-  declarations: [TeachersPage]
+  declarations: [
+    AddTeacherModalComponent,
+    TeachersPage,
+  ]
 })
-export class TeachersPageModule {}
+export class TeachersPageModule { }

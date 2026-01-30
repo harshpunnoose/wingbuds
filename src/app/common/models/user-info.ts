@@ -1,26 +1,49 @@
+export interface linkData {
+  active: boolean;
+  label: string;
+  url: string;
+}
+export interface PaginationData {
+  current_page: number;
+  data: Array<UserInfo>;
+  first_page_url: string;
+  from: number;
+  last_page: number;
+  last_page_url: string;
+  links: Array<linkData>;
+  next_page_url: string;
+  path: string;
+  per_page: string;
+  prev_page_url: string;
+  to: number;
+  total: number;
+}
 export interface UserInfo {
   alt_phone: string;
-  created_time: number;
+  created_at: string;
   email: string;
-  fees: number;
   first_name: string;
   id: number;
-  last_login_time: number;
   last_name: string;
   parent: string;
-  password: string;
   phone: string;
-  status: UserStatus;
-  updated_by: number;
-  updated_time: number;
+  status: string;
+  updated_at: string;
+  user_id: number;
   user_img: string;
-  user_type: UserType;
   username: string;
 }
 
 export interface UserInfoPagination {
+  data: PaginationData;
+  success: boolean;
   totalRecord: number;
   userInfo: Array<UserInfo>;
+}
+
+export interface UserData {
+  data: UserInfo;
+  success: boolean;
 }
 
 export enum UserType {
@@ -28,8 +51,4 @@ export enum UserType {
   Teacher = 'T',
 }
 
-export enum UserStatus {
-  Active = 'A',
-  Delete = 'D',
-  Inactive = 'I',
-}
+

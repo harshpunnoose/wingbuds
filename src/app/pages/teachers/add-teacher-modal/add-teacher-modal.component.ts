@@ -1,22 +1,21 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ModalController } from '@ionic/angular';
-import { StudentsService } from '../data/students.service';
 import { Subject, takeUntil } from 'rxjs';
 import { UiService } from 'src/app/common/services/ui.service';
+import { TeachersService } from '../data/teachers.service';
 
 @Component({
-  selector: 'app-add-student-modal',
-  templateUrl: './add-student-modal.component.html',
-  styleUrls: ['./add-student-modal.component.scss']
+  selector: 'app-add-teacher-modal',
+  templateUrl: './add-teacher-modal.component.html',
+  styleUrls: ['./add-teacher-modal.component.scss'],
 })
-export class AddStudentModalComponent implements OnDestroy, OnInit {
-  student = {
+export class AddTeacherModalComponent implements OnDestroy, OnInit {
+  teacher = {
     id: 0,
-    alt_phone: '',
+    skype_id: '',
     email: '',
     first_name: '',
     last_name: '',
-    parent: '',
     password: '',
     phone: '',
     status: 'active',
@@ -28,19 +27,18 @@ export class AddStudentModalComponent implements OnDestroy, OnInit {
 
   previewImage: string | ArrayBuffer | null = null;
   isEdit = false;
-  title = 'Add Student';
+  title = 'Add Teacher';
 
   constructor(
     private modalCtrl: ModalController,
-    private studentsService: StudentsService,
+    private teachersService: TeachersService,
     private uiService: UiService
   ) { }
 
 
   ngOnInit(): void {
-    console.log('harsh student = ', this.student);
-    this.isEdit = this.student?.id > 0;
-    this.title = this.isEdit ? `Edit Student - ${this.student?.first_name} ${this.student?.last_name}` : "Add Student";
+    this.isEdit = this.teacher?.id > 0;
+    this.title = this.isEdit ? `Edit Teacher - ${this.teacher?.first_name} ${this.teacher?.last_name}` : "Add Teacher";
   }
 
   ngOnDestroy(): void {
@@ -60,19 +58,19 @@ export class AddStudentModalComponent implements OnDestroy, OnInit {
     }
   }
 
-  saveStudent(): void {
-    if (!this.student) {
-      this.uiService.showToast('Invalid student data', 'danger');
+  saveTeacher(): void {
+    if (!this.teacher) {
+      this.uiService.showToast('Invalid Teacher data', 'danger');
       return;
     }
 
-    const formData = this.buildStudentFormData();
+    const formData = this.buildTeacherFormData();
 
     this.uiService.showLoading();
 
     const request$ = this.isEdit
-      ? this.studentsService.editStudent(this.student.id, formData)
-      : this.studentsService.addStudent(formData);
+      ? this.teachersService.editTeacher(this.teacher.id, formData)
+      : this.teachersService.addTeacher(formData);
 
     request$
       .pipe(takeUntil(this.unsubscribe$))
@@ -82,7 +80,7 @@ export class AddStudentModalComponent implements OnDestroy, OnInit {
       });
   }
 
-  private buildStudentFormData(): FormData {
+  private buildTeacherFormData(): FormData {
     const formData = new FormData();
 
     if (this.isEdit) {
@@ -90,14 +88,14 @@ export class AddStudentModalComponent implements OnDestroy, OnInit {
     }
 
     Object.entries({
-      first_name: this.student.first_name,
-      last_name: this.student.last_name,
-      username: this.student.username,
-      email: this.student.email,
-      phone: this.student.phone,
-      alt_phone: this.student.alt_phone,
-      parent: this.student.parent,
-      status: this.student.status,
+      first_name: this.teacher.first_name,
+      last_name: this.teacher.last_name,
+      username: this.teacher.username,
+      password: this.teacher.password,
+      email: this.teacher.email,
+      phone: this.teacher.phone,
+      skype_id: this.teacher.skype_id,
+      status: this.teacher.status,
     }).forEach(([key, value]) => {
       if (value !== null && value !== undefined) {
         formData.append(key, value as string);
@@ -115,15 +113,15 @@ export class AddStudentModalComponent implements OnDestroy, OnInit {
     this.uiService.hideLoading();
 
     const message = this.isEdit
-      ? 'Student updated successfully ✅'
-      : 'Student created successfully ✅';
+      ? 'Teacher updated successfully ✅'
+      : 'Teacher created successfully ✅';
 
     this.uiService.showToast(message, 'success');
 
     this.selectedImage = null;
 
     // Close modal and notify parent
-    this.modalCtrl.dismiss(res?.data ?? this.student, 'success');
+    this.modalCtrl.dismiss(res?.data ?? this.teacher, 'success');
   }
 
   private handleError(err: any): void {

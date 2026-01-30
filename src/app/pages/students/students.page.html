@@ -26,7 +26,7 @@
     </ion-searchbar>
 
     <ion-button fill="clear" (click)="openSortOptions()">
-      <ion-icon slot="icon-only" name="funnel-outline"></ion-icon>
+      <ion-icon slot="icon-only" name="swap-vertical-outline"></ion-icon>
     </ion-button>
   </ion-item>
 
@@ -53,23 +53,27 @@
   </ion-grid> -->
   <ion-grid>
     <ion-row>
-      <ion-col size="12" size-md="6" size-lg="4" *ngFor="let user of filteredUsers">
+      <ion-col size="12" size-md="6" size-lg="6" *ngFor="let user of filteredUsers">
         <ion-card (click)="openStudentDetail(user)">
           <ion-card-header>
             <ion-item lines="none">
               <ion-avatar slot="start">
                 <img [alt]="user?.first_name + ' ' + user?.last_name"
-                  [src]="user?.user_img || 'assets/default-avatar.png'" />
+                  [src]="user?.user_img_url || 'assets/icons/human-icon.png'" />
               </ion-avatar>
               <ion-label>
                 <ion-card-title>{{ user?.first_name }} {{ user?.last_name }}</ion-card-title>
-                <ion-card-subtitle>{{ user?.status }} • Fees: {{ user?.fees }}</ion-card-subtitle>
+                <ion-card-subtitle>
+                  Parent : {{ user?.parent }}<br>
+                  Mobile: {{ user?.phone }} <br>
+                  Email: {{ user?.email }}
+                </ion-card-subtitle>
               </ion-label>
             </ion-item>
           </ion-card-header>
 
           <!-- 🔹 Action buttons for each student -->
-          <ion-card-content>
+          <!-- <ion-card-content>
             <ion-buttons class="ion-justify-content-between">
               <ion-button fill="clear" size="small" (click)="editStudent(user)">
                 <ion-icon slot="icon-only" name="create-outline"></ion-icon>
@@ -87,7 +91,7 @@
                 <ion-icon slot="icon-only" name="document-text-outline"></ion-icon>
               </ion-button>
             </ion-buttons>
-          </ion-card-content>
+          </ion-card-content> -->
         </ion-card>
       </ion-col>
     </ion-row>
