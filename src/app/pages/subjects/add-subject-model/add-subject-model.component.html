@@ -1,0 +1,40 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>{{title}}</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="dismiss()">Close</ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <form (ngSubmit)="saveSubject()" #subjectForm="ngForm" class="ion-padding">
+
+    <ion-item>
+      <ion-label position="floating">Name</ion-label>
+      <ion-input [(ngModel)]="subject.name" name="name" required></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="floating">Code</ion-label>
+      <ion-input [(ngModel)]="subject.code" name="code" required></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="floating">Description</ion-label>
+      <ion-input [(ngModel)]="subject.description" name="description"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label>Status</ion-label>
+      <ion-select [(ngModel)]="subject.status" name="status">
+        <ion-select-option value="active">Active</ion-select-option>
+        <ion-select-option value="inactive">Inactive</ion-select-option>
+      </ion-select>
+    </ion-item>
+
+    <ion-button expand="block" type="submit" [disabled]="!subjectForm.form.valid">
+      Save subject
+    </ion-button>
+  </form>
+</ion-content>

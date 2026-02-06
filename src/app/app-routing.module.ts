@@ -28,6 +28,10 @@ const routes: Routes = [
     loadChildren: () => import('./pages/subjects/subjects.module').then(m => m.SubjectsPageModule)
   },
   {
+    path: 'subject/:id',
+    loadChildren: () => import('./pages/subjects/subject-detail/subject-detail.module').then(m => m.SubjectDetailModule)
+  },
+  {
     path: 'classes',
     loadChildren: () => import('./pages/classes/classes.module').then(m => m.ClassesPageModule)
   },
